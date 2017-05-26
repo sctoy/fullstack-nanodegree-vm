@@ -17,7 +17,7 @@ DBSession = sessionmaker(bind = engine)
 # This is the local instance of DBSession
 session = DBSession()
 
-# An API Endpoint JSON (GET Requast) for all of the menu items for one restaurant
+# An API Endpoint JSON (GET Request) for all of the menu items for one restaurant
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON')
 def restaurantMenuJSON(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
@@ -85,7 +85,8 @@ def deleteMenuItem(restaurant_id, menu_id):
 
 # Code that runs if this file is run directly (e.g. >>> python project.py)
 if __name__ == '__main__':
-    # Key to lock down the app. Not sure how or where this is used or called.
+    # Key to lock down the app. Not sure how or where this is used or called,
+    # but one place is when you issue a POST command. Without this POSTs fail.
     app.secret_key = 'super_secret_key'
     app.debug = True
     app.run(host = '0.0.0.0', port = 5000)

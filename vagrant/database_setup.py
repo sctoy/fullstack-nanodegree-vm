@@ -24,6 +24,15 @@ class Restaurant(Base):
 	name = Column(String(80), nullable = False)
 	id = Column(Integer, primary_key = True)
 
+	# This is the decorated function that informs the JSON feed
+	@property
+	def serialize(self):
+		#Returns object data in easily serializable format
+		return {
+			'name'			:self.name,
+			'id'			:self.id,
+		}
+
 
 # Setup MenuItem table in DB
 class MenuItem(Base):
